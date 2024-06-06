@@ -12,6 +12,16 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
-    "three": "^0.164.1"
+    "@dimforge/rapier3d": "^0.13.1",
+    "@types/matter-js": "0.17.6",
+    "@types/three": "0.161.2",
+    "enable3d": "^0.25.4",
+    "matter-js": "0.17.1",
+    "phaser": "^3.55.2",
+    "poly-decomp": "^0.3.0",
+    "three": "^0.164.1",
+    "three-csg-ts": "^3.1.10",
+    "vite-plugin-top-level-await": "^1.4.1",
+    "vite-plugin-wasm": "^3.3.0"
   }
 }

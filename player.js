@@ -3,6 +3,8 @@ import { PointerLockControls } from 'three/examples/jsm/Addons.js'
 import { cameraFar, positionLocal } from 'three/examples/jsm/nodes/Nodes.js'
 
 export class Player {
+
+    raycaster
     maxSpeed = 1.1;
     input = new THREE.Vector3()
     velocity = new THREE.Vector3()
@@ -21,19 +23,18 @@ export class Player {
         this.boundingBoxes = boundingBoxes
         this.position.set(11, 0.74, 3)
         scene.add(this.camera)
-        scene.add(this.cameraHelper)
+        // scene.add(this.cameraHelper)
         document.addEventListener('keydown', this.onKeyDown.bind(this))
         document.addEventListener('keyup', this.onKeyUp.bind(this))
     }
 
     applyInputs(dt) {
         if (this.controls.isLocked) {
-
-            
-           this.velocity.x = this.input.x
-           this.velocity.z = this.input.z
-           this.controls.moveRight(this.velocity.x * dt)
-           this.controls.moveForward(this.velocity.z * dt)   
+           
+            this.velocity.x = this.input.x
+            this.velocity.z = this.input.z
+            this.controls.moveRight(this.velocity.x * dt)
+            this.controls.moveForward(this.velocity.z * dt)   
            
         }
         document.getElementById('player-position').innerHTML = this.toString()
@@ -73,12 +74,14 @@ export class Player {
                 this.input.x = this.maxSpeed
                 break     
             }
+            
     }
 
     /**
      * Event handler for 'keyup' event
      * @param {KeyboardEvent} event
      */
+
     onKeyUp(event) {
         switch(event.code) {
             case 'KeyW':

@@ -13,8 +13,7 @@ renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
 
 // For obstacles
-const boundingBoxes = [];
-
+const objects = [];
 
 // Camera Setup
 const orbitCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -29,7 +28,7 @@ controls.update();
 const scene = new THREE.Scene();
 
 // Player
-const player = new Player(scene, boundingBoxes);
+const player = new Player(scene);
 
 
 // Light Setup
@@ -45,7 +44,7 @@ function setupLights() {
     sun.shadow.camera.far = 100;
     scene.add(sun);
     const shadowHelper = new THREE.CameraHelper(sun.shadow.camera);
-    scene.add(shadowHelper);
+    // scene.add(shadowHelper);
 
     const ambient = new THREE.AmbientLight();
     ambient.intensity = 0.01;
@@ -65,8 +64,8 @@ loader.load('models/college.glb', function (gltf) {
         }
     });
     scene.add(gltf.scene);
-    // objects.push(gltf.scene);
-    player.boundingBox = new THREE.Box3().setFromObject(player.camera); 
+    objects.push(gltf.scene);
+    // player.boundingBox = new THREE.Box3().setFromObject(player.camera); 
 });
 
 // loader.load('models/college2.glb', function (gltf2) {
@@ -74,15 +73,15 @@ loader.load('models/college.glb', function (gltf) {
 //         if (n.isMesh) {
 //             n.material.opacity = 0;
 //             n.material.transparent = true;
-//             const box = new THREE.Box3().setFromObject(n);
-//             boundingBoxes.push(box);
 //         }
 //     });
 //     scene.add(gltf2.scene);
 //     objects.push(gltf2.scene);
 // });
 
-let previousTime = performance.now();
+
+
+    let previousTime = performance.now();
 
 // Render Loop
 function animate() {
@@ -90,6 +89,10 @@ function animate() {
     let dt = (currentTime - previousTime) / 1000;
     
     requestAnimationFrame(animate);
+
+
+    //DETECT OBSTACLES IN W
+
 
     // const raycasterY = new THREE.Raycaster()
     // raycasterY.set(player.camera.position, new THREE.Vector3(0, -1, 0))
